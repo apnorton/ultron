@@ -16,3 +16,9 @@ What's its status?
 ------------------
 
 Ultron is still in the conceptual phases.  This will be a fairly large project, so proper design is a must.
+
+What do I need to make this work?
+---------------------------------
+
+I'm developing on Ubuntu 14.04 with this repo in a `virtualenv`.  The packages I've installed thus far are:
+  - `websocket-client`

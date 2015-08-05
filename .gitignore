@@ -1,0 +1,11 @@
+##
+# .gitignore
+##
+
+# Don't store the virtualenv stuff
+bin/**
+include/**
+lib/**
+
+# Python temporary stuff
+__pycache__/**
