@@ -1,0 +1,3 @@
+[submodule "ChatExchange3"]
+	path = ChatExchange3
+	url = git@github.com:ByteCommander/ChatExchange3.git
