@@ -8,4 +8,5 @@ include/**
 lib/**
 
 # Python temporary stuff
-__pycache__/**
+**/__pycache__/**
+*.pyc
