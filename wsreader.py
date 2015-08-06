@@ -7,7 +7,7 @@
 
 import websocket
 import time
-from question import Question
+from stackexchange.question import Question
 
 
 ##
