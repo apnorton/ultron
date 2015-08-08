@@ -2,14 +2,16 @@
 # Globals
 #
 #  This file contains information relevant to the entire ultron codebase,
-# not just a single file. 
+# not just a single file.
 ##
 
 import chatexchange3
 
 class Globals:
-  
   #### Variables ####
+
+  ## About me
+  bot_name = 'A Familiar Face'
 
   ## Login information and API keys
   ChatExchangeU = None
@@ -17,18 +19,27 @@ class Globals:
   WolframApiKey = None
 
   ## Chatroom information (k in roomID iff k in roomDomain)
-  roomID = {
+  room_id = {
     'test'   : 911,
     'tavern' : 89
     }
 
-  roomDomain {
+  room_domain = {
     'test'   : 'meta.stackexchange.com',
     'tavern' : 'meta.stackexchange.com'
     }
 
+  ## Privileged users on a given site
+  privileged_users = {
+    'meta.stackexchange.com' : [
+        201314 # apnorton
+      ]
+    }
+
   #### Functions ####
 
-  def isWolframEnabled():
-    return not WolframApiKey
+  def is_wolfram_enabled():
+    return not Globals.WolframApiKey
 
+  def is_privileged(client, user):
+    return user in Globals.privileged_users[client.host]
