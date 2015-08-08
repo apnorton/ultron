@@ -2,6 +2,9 @@
 # .gitignore
 ##
 
+# Don't publicize my API keys, etc:
+*/config.sh
+
 # Don't store the virtualenv stuff
 bin/**
 include/**
@@ -10,6 +13,3 @@ lib/**
 # Python temporary stuff
 **/__pycache__/**
 *.pyc
-
-# Don't publicize my API keys, etc:
-*config.sh 
