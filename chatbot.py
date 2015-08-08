@@ -5,32 +5,53 @@
 
 import os
 import getpass
-
 import chatexchange3
+from globals import Globals
 
-## Standard "get username and password" stuff
-if 'ChatExchangeU' in os.environ:
-  email = os.environ['ChatExchangeU']
-else:
-  email = input("Email: ")
-if 'ChatExchangeP' in os.environ:
-  password = os.environ['ChatExchangeP']
-else:
-  password = getpass.getpass("Password: ")
+##
+# Variables
+##
+promptStr = ':>'
 
-## Connect to test room and figure out who I am
-print("Connecting to host...")
-client = chatexchange3.Client('meta.stackexchange.com', email, password)
-testroom = client.get_room(911)
-me = client.get_me()
-print(me.__dict__)
+##
+# Loads config variables, etc, from environment variables or typing
+##
+def loadConfig():
+  if 'ChatExchangeU' in os.environ:
+    Globals.ChatExchangeU = os.environ['ChatExchangeU']
+  else:
+    Globals.ChatExchangeU = input("Email: ")
 
-testroom.send_message("I'm online!")
+  if 'ChatExchangeP' in os.environ:
+    Globals.ChatExchangeP = os.environ['ChatExchangeP']
+  else:
+    Globals.ChatExchangeP = getpass.getpass("Password: ")
 
-for message in testroom.new_messages():
-  text = message.content
-  if (text.startswith("//")):
-    # handle commands
-    if (text[2:].startswith("whoami")):
-      testroom.send_message("My user ID is {}.".format(me.id))
-  print (message.content)
+  if 'WolframApiKey' in os.environ:
+    Globlas.WolframApiKey = os.environ['WolframApiKey']
+  else:
+    Globals.WolframApiKey = input("Wolfram API Key (if none, just press enter): ") 
+
+if __name__ == '__main__':
+  ## Startup
+  print("Loading configuration...")
+  loadConfig()
+
+  print("Connecting to host...")
+  client = chatexchange3.Client('meta.stackexchange.com', email, password)
+  testroom = client.get_room(roomID['test'])
+
+  print("Retreiving room information")
+  me = client.get_me()
+
+  print("Ready")
+
+  ## Load basic
+  for message in testroom.new_messages():
+    text = message.content
+    if (text.startswith(promptStr)):
+      # handle commands
+      (command, args) = tuple(text[len(promptStr)].split(' ', 1))
+      if (text[len(promptStr):].startswith("whoami")):
+        testroom.send_message("My user ID is {}.".format(me.id))
+    print (message.content)
