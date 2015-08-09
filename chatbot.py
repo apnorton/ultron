@@ -1,7 +1,7 @@
-##
+###
 # chatbot.py
 # This script manages the chat interface for ultron
-##
+###
 
 import os
 import getpass
@@ -9,6 +9,7 @@ import sys
 import time
 
 import chatexchange3
+from wolfram import Wolfram
 from globals import Globals
 
 ##
@@ -19,10 +20,10 @@ command_description = {
   'whoami'  : 'Lists the user ID for the account running this bot on this site',
   'help'    : 'Displays this help text.',
   'about'   : 'Displays purpose statement/bot greeting.',
-  #'wolfram' : ('Evaluates a string with the Wolfram Alpha API '
-  #             '(Note: the account can only make 2000 requests/month, so this '
-  #             'is rate-limited per day. Privileged users can exceed the '
-  #             'rate-limiting.)'),
+  'wolfram' : ('Evaluates a string with the Wolfram Alpha API. '
+               '(Note: the account can only make 2000 requests/month, so this '
+               'is rate-limited per day. Privileged users can exceed the '
+               'rate-limiting.)'),
   'say'     : 'Sends a message with provided text (privileged users only).',
   'star'    : 'Stars the message with provided number (privileged users only)',
   'die'     : 'Kills chatbot (privileged users only)'
@@ -106,7 +107,10 @@ def handle_command(command, args, client, room, source_message):
     elif args in command_description:
       reply_to(command_description[args], room, source_message)
     else:
-      reply_to("I'm sorry, I don't understand.", room, source_message)
+      reply_to("I'm sorry, I don't understand with what you need help.",
+               room, source_message)
+  elif command == 'wolfram':
+      reply_to(Globals.wolf.smart_query(args), room, source_message)
   else:
     reply_to("I'm sorry, I don't understand that command.", room, source_message)
 
@@ -121,6 +125,7 @@ if __name__ == '__main__':
   print("Connecting to host...")
   client = chatexchange3.Client(Globals.room_domain['test'], Globals.ChatExchangeU, Globals.ChatExchangeP)
   testroom = client.get_room(Globals.room_id['test'])
+  Globals.wolf = Wolfram(Globals.WolframApiKey)
 
   print("Ready")
 

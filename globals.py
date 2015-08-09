@@ -36,6 +36,9 @@ class Globals:
       ]
     }
 
+  ## Wolfram client instance
+  wolf = None
+
   #### Functions ####
 
   def is_wolfram_enabled():

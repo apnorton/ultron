@@ -13,3 +13,6 @@ lib/**
 
 # Don't publish api keys:
 config.sh
+
+# Don't worry about pip files:
+pip-selfcheck.json

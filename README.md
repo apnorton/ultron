@@ -3,7 +3,7 @@ ultron
 
 *I see a suit of armor around Math.SE...*
 
-Math Stack Exchange is under constant attack by low quality questioners.  The goal of Ultron is to form a preemptive strike against low quality posts by immediate recognition, reporting, downvote, closure, and deletions.  Another side effect is to generate a list of high-quality, yet old, questions to be handled by our Crusaders. 
+Math Stack Exchange is under constant attack by low quality questioners.  The goal of Ultron is to form a preemptive strike against low quality posts by immediate recognition, reporting, downvote, closure, and deletions.  Another side effect is to generate a list of high-quality, yet old, questions to be handled by our Crusaders.
 
 How will it work?
 -----------------
@@ -22,5 +22,6 @@ What do I need to make this work?
 
 I'm developing on Ubuntu 14.04 with this repo in a `virtualenv`.  The packages I've installed thus far are:
   - `websocket-client`
+  - `xmltodict`
 
 To manage all chatroom interaction, I use the [ChatExchange3](https://github.com/ByteCommander/ChatExchange3) project, which is added as a submodule in this repo.

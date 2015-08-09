@@ -1,9 +1,9 @@
-##
-# wsreader.py 
+###
+# wsreader.py
 #
-# a StackExchange websocket reader to get a live feed of 
-# every question asked on SE. 
-##
+# a StackExchange websocket reader to get a live feed of
+# every question asked on SE.
+###
 
 import websocket
 import time
@@ -29,4 +29,3 @@ while True:
     print(type(e))
     print(e.args)
     print(e)
-
