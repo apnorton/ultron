@@ -8,14 +8,16 @@ Math Stack Exchange is under constant attack by low quality questioners.  The go
 How will it work?
 -----------------
 
-Right now, Ultron is still in the planning stages.  The general tactic is to train a Bayesian network to recognize low quality posts based off of factors like length, LaTeX usage, user age and reputation, etc.  To collect data, I'm going to perform analysis of my own votes (up, down, close, and deletion), as well as attempting to skim the low-quality posts and closure queue history.
+Right now, Ultron is still in the early developmental stages.  The general tactic is to train a Bayesian network to recognize low quality posts based off of factors like length, LaTeX usage, user age and reputation, etc.  To collect data, I'm going to perform analysis of my own votes (up, down, close, and deletion), as well as attempting to skim the low-quality posts and closure queue history.
 
 Eventually, I'd like to perform automated duplicate checking, but it's still fairly difficult to search for mathematics.
+
+The primary interface for the program will be StackExchange chat, specifically the Math.SE chatroom (and low-quality post room).  Since it will be hanging out in chat anyway, I've decided to add some "helpful" features (e.g. Wolfram Alpha API calls).  For the backend, I'm going to create a web-based framework (that way, I don't have to keep watching the terminal for errors, etc).
 
 What's its status?
 ------------------
 
-Ultron is still in the conceptual phases.  This will be a fairly large project, so proper design is a must.
+Ultron is still in its early development phases.  I've built the basic chatbot skeleton and the websocket reader for processing questions as they come in.  The next steps are to build and train the Bayesian network, make the chat interface more robust, then build a better backend.
 
 What do I need to make this work?
 ---------------------------------
