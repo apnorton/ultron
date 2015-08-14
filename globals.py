@@ -11,7 +11,7 @@ class Globals:
   #### Variables ####
 
   ## About me
-  bot_name = 'A Familiar Face'
+  bot_name = "A Familiar Face"
 
   ## Login information and API keys
   ChatExchangeU = None
