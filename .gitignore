@@ -17,6 +17,7 @@ scraper/cookies.json
 
 # Don't publish my voting data just yet...
 scraper/my_votes.txt
+scraper/data.csv
 
 # Don't worry about pip files:
 pip-selfcheck.json
