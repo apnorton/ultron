@@ -16,6 +16,7 @@ def get_web(url):
 
   #TODO do some more advanced kind of error checking here
   r = requests.get(url, cookies=cookies)
+
   if not r.ok:
     print ('Error loading {}'.format(url))
 
@@ -52,9 +53,14 @@ def parse_page(q_id, html):
   question_text = soup.select('.post-text')[0].getText()
   question_tags = [x.getText() for x in set(soup.select('.post-tag'))]
   owner = select_owner(soup.select('.post-signature'))
-  owner_url = owner.select('.user-details')[0].select('a')[0].get('href')
-  owner_id = re.search('/users/(?P<id>\d+)/.*', owner_url).group('id')
-  owner_rep = parse_rep(owner.select('.reputation-score')[0])
+
+  if (len(owner.select('.user-details')[0].select('a')) > 0):
+    owner_url = owner.select('.user-details')[0].select('a')[0].get('href')
+    owner_id = re.search('/users/(?P<id>\d+)/.*', owner_url).group('id')
+    owner_rep = parse_rep(owner.select('.reputation-score')[0])
+  else:
+    owner_id = -1
+    owner_rep = 1
 
   data = [
     q_id,
@@ -83,26 +89,34 @@ if __name__=='__main__':
     questions = f.read().splitlines()
     for i in range(start_index, len(questions)):
       q = questions[i]
-      print('Downloading question {}...'.format(q))
-      html = get_web(base_url + q)
-      print('Parsing...')
-      try:
-        row = parse_page(int(q), html)
-      except Exception as ex:
-        traceback.print_exc()
-        print(ex)
-        print('The html code that failed to parse has been written to file:')
-        with open('err.out', 'w') as err:
-          for l in html.splitlines():
-            err.write(l)
-            err.write('\n')
 
-        sys.exit(1)
-      print('Writing...')
+      failed = True
+      consec_errors = 0
+      while (failed):
+        print('Downloading question {}...'.format(q))
+        html = get_web(base_url + q)
+        print('Parsing...')
+        try:
+          row = parse_page(int(q), html)
+          failed = False
+          consec_errors = 0
+        except Exception as ex:
+          traceback.print_exc()
+          print(str(ex))
+          print('Error encountered... trying this iteration over again')
+          failed = True
+          consec_errors += 1
 
-      with open('data.csv', 'a') as output:
-        writer = csv.writer(output)
-        writer.writerow(row)
+        if (not failed):
+          print('Writing...')
 
-      print('Done with index {}.'.format(i))
-      sleep(5)
+          with open('data.csv', 'a') as output:
+            writer = csv.writer(output)
+            writer.writerow(row)
+
+          print('Done with index {}.'.format(i))
+        elif consec_errors > 5:
+          print('I\'ve failed 5 times in a row, so I\'m quitting')
+          sys.exit(1)
+
+        sleep(30)
