@@ -11,8 +11,12 @@ lib/**
 **/__pycache__/**
 *.pyc
 
-# Don't publish api keys:
+# Don't publish api keys or cookie data:
 config.sh
+scraper/cookies.json
+
+# Don't publish my voting data just yet...
+scraper/my_votes.txt
 
 # Don't worry about pip files:
 pip-selfcheck.json
