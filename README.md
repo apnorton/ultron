@@ -25,5 +25,8 @@ What do I need to make this work?
 I'm developing on Ubuntu 14.04 with this repo in a `virtualenv`.  The packages I've installed thus far are:
   - `websocket-client`
   - `xmltodict`
+  - `numpy`
+  - `scipy`
+  - `sklearn`
 
 To manage all chatroom interaction, I use the [ChatExchange3](https://github.com/ByteCommander/ChatExchange3) project, which is added as a submodule in this repo.

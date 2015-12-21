@@ -5,7 +5,7 @@
 # not just a single file.
 ##
 
-import chatexchange3
+import ChatExchange3.chatexchange3 as chatexchange3
 
 class Globals:
   #### Variables ####
@@ -20,12 +20,12 @@ class Globals:
 
   ## Chatroom information (k in roomID iff k in roomDomain)
   room_id = {
-    'test'   : 911,
-    'tavern' : 89
+    'test'   : 25323, # chatbot dev room on chat.se
+    'tavern' : 89     # tavern on the meta
     }
 
   room_domain = {
-    'test'   : 'meta.stackexchange.com',
+    'test'   : 'stackexchange.com',
     'tavern' : 'meta.stackexchange.com'
     }
 
@@ -33,6 +33,9 @@ class Globals:
   privileged_users = {
     'meta.stackexchange.com' : [
         201314 # apnorton
+      ],
+    'stackexchange.com' : [
+        54229 # apnorton
       ]
     }
 

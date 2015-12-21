@@ -8,7 +8,7 @@ import getpass
 import sys
 import time
 
-import chatexchange3
+import ChatExchange3.chatexchange3 as chatexchange3
 from wolfram import Wolfram
 from globals import Globals
 
